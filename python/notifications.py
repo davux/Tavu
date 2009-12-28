@@ -5,7 +5,7 @@ import app
 from common import problem, debug
 from conf import config
 from globalvars import encoding
-import pcop
+import dbus
 import sys
 from string import Template
 
@@ -24,10 +24,10 @@ def notify(text, appName, eventName):
     try: eventName = eventName.encode('iso-8859-15')
     except UnicodeEncodeError: eventName = '' #XXX: Better fallback name?
     try:
-        debug('DCOP: dcop knotify default notify %s %s %s "" "" 16 0' %
-            (eventName, appName, text), 6)
-        pcop.dcop_call('knotify', 'default', 'notify',
-                   (eventName, appName, text, '', '', 16, 0))
+	session_bus = dbus.SessionBus()
+	obj = session_bus.get_object('org.freedesktop.Notifications', '/org/freedesktop/Notifications')
+	interface = dbus.Interface(obj, 'org.freedesktop.Notifications')
+	interface.Notify(appName, 0, '', eventName, text, [], {}, 16000)
     except:
         problem('Could not trigger notification: %s \n' % sys.exc_info()[1])
 

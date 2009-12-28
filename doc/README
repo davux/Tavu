@@ -4,9 +4,9 @@
 
 == What is it? ==
 
-    Tavu allows remote programs to use your local KDE notification system
-    (aka knotify). The network communication between the remote program and
-    knotify is performed using the XMPP (Jabber) protocol.
+    Tavu allows remote programs to use DBUS's notification system.
+    The network communication between the remote program and DBUS
+    is performed using the XMPP (Jabber) protocol.
 
 == How does it work? ==
 
@@ -15,9 +15,9 @@
     - On the other side, you have a program that sends messages to Tavu,
       for example irssi script 'jabber_hilight_notify.pl'.
 
-    When Tavu receives a message, it triggers a KDE notification. A KDE
-    notification has 3 main characteristics:
-     1. the application that triggers it,
+    When Tavu receives a message, it triggers a DBUS notification, which
+    uses 3 pieces of information:
+     1. the application that sent the notification via Jabber,
      2. the name of the event,
      3. the message itself.
     Any of these 3 values can be defined in the configuration file, and may

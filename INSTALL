@@ -1,0 +1,8 @@
+-- KJabNotify
+-- Written by David Ammouial <da HAT weeno DOUBT net>
+
+To install kjabnotify, simply run 'make' in the archive directory. The name
+of the executable will be 'kjabnotify_listener'.
+
+To remove, run 'make uninstall' or 'make purge'. The latter will remove the
+configuration file as well.

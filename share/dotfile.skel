@@ -1,0 +1,8 @@
+[Jabber]
+;; Set your Jabber information here.
+;jid = foo@server/Resource
+;jid = foo@server
+;password = secret
+
+;; You can add other settings. See the system-wide configuration file
+;; (usually /etc/kde3/kjabnotifyrc) for the other possible options.

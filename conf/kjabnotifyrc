@@ -1,0 +1,24 @@
+[Jabber]
+;; This is usually defined on a per-user basis.
+;jid = foo@server/Resource
+;jid = foo@server
+;password = secret
+
+[Notification formats]
+;; Here you can customize the format of the notification that is generated
+;; when a new message arrives.
+;;   $sender: the name of the sender (from the roster). Bare JID if no name.
+;;   $senderjid: the bare JID (without resource) of the sender
+;;   $senderresource: the resource of the sender
+;;   $subject: the message subject
+;;   $body: the message body
+;app name = $senderresource
+;event name = $subject
+;text = $body
+
+[Message filters]
+;; Values for 'accept':
+;;     self, roster, roster+self, list, roster+list, all, none
+;accept = roster+self
+;; Comma-separated list of jids (only if 'accept' is list or roster+list)
+;list = foo@project.org, jack@domain.net, mary@company.com

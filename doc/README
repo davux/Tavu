@@ -1,0 +1,32 @@
+-- KJabNotify
+-- Written by David Ammouial <da HAT weeno DOUBT net>
+
+
+== What is it? ==
+
+    KJabnotify allows programs to use KDE's notification system (aka knotify),
+    even if they're not running on the local host. The communication is done
+    over the network, using the XMPP (Jabber) protocol.
+
+
+== How does it work? ==
+
+    - On one side, you have KJabnotify running locally, waiting for incoming
+      messages via Jabber.
+    - On the other side, you have a program that sends messages to KJabnotify,
+      for example irssi script 'jabber_hilight_notify.pl'.
+
+    When KJabnotify receives a message, it triggers a KDE notification. A KDE
+    notification has 3 main characteristics:
+     1. the application that triggers it,
+     2. the name of the event,
+     3. the message itself.
+    Any of these 3 values can be defined in the configuration file, and may
+    include parts of the message, like $subject, $body, $sender, etc.. This
+    gives great flexibility in the way you interact with the remote application.
+
+    For example, the name of the event may be sent in the subject of the
+    message, the text of the message can (obviously) be sent in the message
+    body, and the name of the application may be the resource. Alternatively,
+    the name of the application may be the name associated to its JID in the
+    roster.

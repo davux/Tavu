@@ -1,0 +1,56 @@
+#! /usr/bin/python
+# -*- coding: utf-8 -*-
+# vi: sts=4 et sw=4
+
+import codecs
+import locale
+import logging
+from pyxmpp.roster import Roster
+from pyxmpp.all import JID,Iq,Presence,Message,StreamError
+import signal
+import sys
+sys.path = ['/usr/share/kjabnotify/python/'] + sys.path
+
+from common import problem, debug
+from conf import config, createUserConf, handleMissingSetting
+from globalvars import encoding
+from jabberbot import JabberBot
+import notifications
+
+def handleKill(signum, frame):
+    """Raise a KeyboardInterrupt error when killed."""
+    debug('Killed.')
+    raise KeyboardInterrupt
+signal.signal(signal.SIGTERM, handleKill)
+
+createUserConf()
+
+sys.stdout=codecs.getwriter(encoding)(sys.stdout,errors="replace")
+sys.stderr=codecs.getwriter(encoding)(sys.stderr,errors="replace")
+# PyXMPP uses `logging` module for its debug output
+# applications should set it up as needed
+logger=logging.getLogger()
+logger.addHandler(logging.StreamHandler())
+logger.setLevel(logging.INFO) # change to DEBUG for higher verbosity
+
+try: jid = config.get('Jabber', 'jid')
+except: handleMissingSetting('Jabber', 'jid')
+try: password = config.get('Jabber', 'password')
+except: handleMissingSetting('Jabber', 'password')
+
+debug('Creating client', 3)
+c = JabberBot(JID(jid), password)
+try:
+    debug('Connecting to Jabber', 0)
+    c.connect()
+except:
+    debug('An error occurred. Disconnecting', 2)
+    try: c.disconnect()
+    except: pass
+    problem('Unable to connect to Jabber server.', True)
+try:
+    debug('Connected. Waiting for messages.')
+    c.loop(1)
+except KeyboardInterrupt:
+    debug('Exiting.')
+    c.disconnect()

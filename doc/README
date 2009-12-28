@@ -4,7 +4,7 @@
 
 == What is it? ==
 
-    Tavu allows remote programs to use DBUS's notification system.
+    Tavu allows remote programs to use DBUS notification system.
     The network communication between the remote program and DBUS
     is performed using the XMPP (Jabber) protocol.
 

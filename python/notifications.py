@@ -40,7 +40,7 @@ def message2text(body, fromName, resource, fromAddr, subject):
     """
     if fromName == None:
         fromName = fromAddr
-    section = 'Notification formats'
+    section = 'Event information'
     try: text_format = config.get(section, 'text')
     except: text_format = '$body'
     try: appName_format = config.get(section, 'app name')

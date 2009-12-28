@@ -1,17 +1,21 @@
 [Jabber]
-;; This is usually defined on a per-user basis.
+;; This is usually defined on a per-user basis, but you might want to do it here.
+;;
 ;jid = foo@server/Resource
 ;jid = foo@server
 ;password = secret
 
-[Notification formats]
-;; Here you can customize the format of the notification that is generated
-;; when a new message arrives.
-;;   $sender: the name of the sender (from the roster). Bare JID if no name.
-;;   $senderjid: the bare JID (without resource) of the sender
-;;   $senderresource: the resource of the sender
-;;   $subject: the message subject
-;;   $body: the message body
+[Event information]
+;; Here you can customize how Tavu will generate a KDE notification when a new
+;; message arrives. In addition to normal text, the following variables are
+;; available:
+;;  - $sender: the name of the sender (from the roster). Fallbacks to the bare
+;;             JID if there is no name or if the sender is not in the roster.
+;;  - $senderjid: the bare JID (without resource) of the sender.
+;;  - $senderresource: the resource of the sender.
+;;  - $subject: the message subject.
+;;  - $body: the message body.
+;;
 ;app name = $senderresource
 ;event name = $subject
 ;text = $body
@@ -20,5 +24,5 @@
 ;; Values for 'accept':
 ;;     self, roster, roster+self, list, roster+list, all, none
 ;accept = roster+self
-;; Comma-separated list of jids (only if 'accept' is list or roster+list)
+;; Comma-separated list of jids. Used if accept=list or accept=roster+list.
 ;list = foo@project.org, jack@domain.net, mary@company.com

@@ -9,8 +9,8 @@ import dbus
 import sys
 from string import Template
 
-def notify(text, appName, eventName):
-    "Trigger a notification with the given text using KNotify."
+def notify(text, appName, summary):
+    "Trigger a notification with the given text."
     # We convert from unicode to isolatin9 instead of the system
     # encoding to workaround a bug in PyDCOP (see
     # http://bugs.kde.org/show_bug.cgi?id=105084), unless there's no
@@ -21,13 +21,13 @@ def notify(text, appName, eventName):
         except: text = '[<b>Error:</b> Unable to decode text]'
     try: appName = appName.encode('iso-8859-15')
     except UnicodeEncodeError: appName = app.identifier
-    try: eventName = eventName.encode('iso-8859-15')
-    except UnicodeEncodeError: eventName = '' #XXX: Better fallback name?
+    try: summary = summary.encode('iso-8859-15')
+    except UnicodeEncodeError: summary = '' #XXX: Better fallback name?
     try:
 	session_bus = dbus.SessionBus()
 	obj = session_bus.get_object('org.freedesktop.Notifications', '/org/freedesktop/Notifications')
 	interface = dbus.Interface(obj, 'org.freedesktop.Notifications')
-	interface.Notify(appName, 0, '', eventName, text, [], {}, 16000)
+	interface.Notify(appName, 0, '', summary, text, [], {}, 16000)
     except:
         problem('Could not trigger notification: %s \n' % sys.exc_info()[1])
 
@@ -36,7 +36,7 @@ def message2text(body, fromName, resource, fromAddr, subject):
     Return a triplet from the body + sender + subject
     - the first element is the text of the notification
     - the second element is the application name
-    - the third element is the event name
+    - the third element is the summary
     """
     if fromName == None:
         fromName = fromAddr
@@ -45,13 +45,13 @@ def message2text(body, fromName, resource, fromAddr, subject):
     except: text_format = '$body'
     try: appName_format = config.get(section, 'app name')
     except: appName_format = '$senderresource'
-    try: eventName_format = config.get(section, 'event name')
-    except: eventName_format = '$subject'
+    try: summary_format = config.get(section, 'summary')
+    except: summary_format = '$subject'
     subst = {'body': body, 'senderjid': fromAddr, 'subject': subject,
              'sender': fromName, 'senderresource': resource}
     text_tmpl = Template(text_format)
     appName_tmpl = Template(appName_format)
-    eventName_tmpl = Template(eventName_format)
+    summary_tmpl = Template(summary_format)
     return (text_tmpl.safe_substitute(subst),
             appName_tmpl.safe_substitute(subst),
-            eventName_tmpl.safe_substitute(subst))
+            summary_tmpl.safe_substitute(subst))

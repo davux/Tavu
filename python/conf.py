@@ -11,8 +11,8 @@ import shutil
 import sys
 
 _defaultsFile = '/usr/share/%s/dotfile.skel' % app.identifier
-_globalFile = '/etc/kde3/%src' % app.identifier
-_userFile = os.path.expanduser('~/.kde/share/config/%src' % app.identifier)
+_globalFile = '/etc/%src' % app.identifier
+_userFile = os.path.expanduser('~/.%src' % app.identifier)
 
 def createUserConf(): #TODO: test
     """Create the user-level configuration file from the defaults file

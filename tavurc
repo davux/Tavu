@@ -6,9 +6,10 @@
 ;password = secret
 
 [Event information]
-;; Here you can customize how Tavu will generate a KDE notification when a new
-;; message arrives. In addition to normal text, the following variables are
-;; available:
+;; Here you can customize how Tavu will generate a DBus notification when a new
+;; message arrives. A DBus notification is mainly described by 3 parameters:
+;; application name, summary, and body.
+;; In addition to normal text, the following variables are available:
 ;;  - $sender: the name of the sender (from the roster). Fallbacks to the bare
 ;;             JID if there is no name or if the sender is not in the roster.
 ;;  - $senderjid: the bare JID (without resource) of the sender.
@@ -17,8 +18,8 @@
 ;;  - $body: the message body.
 ;;
 ;app name = $senderresource
-;event name = $subject
-;text = $body
+;summary = $subject
+;body = $body
 
 [Message filters]
 ;; Values for 'accept':

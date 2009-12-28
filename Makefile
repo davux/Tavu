@@ -13,7 +13,7 @@ conf_f   = tavurc
 share_f  = dotfile.skel
 
 dest_binary_d = $(PREFIX)/usr/bin
-dest_conf_d   = $(PREFIX)/etc/kde3
+dest_conf_d   = $(PREFIX)/etc
 dest_doc_d    = $(PREFIX)/usr/share/doc/tavu
 dest_share_d  = $(PREFIX)/usr/share/tavu
 dest_mod_d    = $(PREFIX)/usr/share/tavu/python

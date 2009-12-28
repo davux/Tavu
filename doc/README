@@ -16,19 +16,18 @@
       for example irssi script 'jabber_hilight_notify.pl'.
 
     When Tavu receives a message, it triggers a DBUS notification, which
-    uses 3 pieces of information:
+    comports the following information:
      1. the application that sent the notification via Jabber,
-     2. the name of the event,
-     3. the message itself.
+     2. the summary of the event,
+     3. the body of the event.
     Any of these 3 values can be defined in the configuration file, and may
     include parts of the message, like $subject, $body, $sender, etc.. This
     gives great flexibility in the way you interact with the remote application.
 
-    For example, the name of the event may be sent in the subject of the
-    message, the text of the message can (obviously) be sent in the message
-    body, and the name of the application may be the resource. Alternatively,
-    the name of the application may be the name associated to its JID in the
-    roster.
+    For example, the summary may be sent in the subject of the message, the
+    text of the message can (obviously) be sent in the message body, and the
+    name of the application may be the resource. Alternatively, the name of the
+    application may be the name associated to its JID in the roster.
 
     Please refer to the project page for more information:
     http://da.weeno.net/code/tavu/

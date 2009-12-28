@@ -56,7 +56,7 @@ class JabberBot(JabberClient):
         """Message handler for the component.
 
         Create a human-readable text from the message information, and
-        trigger a KDE notification containing the text.
+        trigger a DBus notification containing the text.
 
         :returns: `True` to indicate that the stanza should not be processed
         any further."""
@@ -70,9 +70,9 @@ class JabberBot(JabberClient):
             return False
         subject = stanza.get_subject()
         f = stanza.get_from()
-        (text, appName, eventName) = notifications.message2text(body,
+        (text, appName, summary) = notifications.message2text(body,
                    self.jid2nick(f), f.resource, f.bare().as_unicode(), subject)
-        notifications.notify(text, appName, eventName)
+        notifications.notify(text, appName, summary)
         return True
 
     def acceptMessage(self, stanza):

@@ -2,7 +2,7 @@
 
 name = 'Tavu'
 identifier = 'tavu'
-version = '0.2.1'
-description = 'External notification listener for KDE'
+version = '0.3'
+description = 'External DBus notification listener'
 
 max_verbosity = 0

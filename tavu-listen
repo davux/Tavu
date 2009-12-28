@@ -9,7 +9,7 @@ from pyxmpp.roster import Roster
 from pyxmpp.all import JID,Iq,Presence,Message,StreamError
 import signal
 import sys
-sys.path = ['/usr/share/kjabnotify/python/'] + sys.path
+sys.path = ['/usr/share/tavu/python/'] + sys.path
 
 from common import problem, debug
 from conf import config, createUserConf, handleMissingSetting

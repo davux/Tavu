@@ -1,22 +1,21 @@
--- KJabNotify
+-- Tavu
 -- Written by David Ammouial <da HAT weeno DOUBT net>
 
 
 == What is it? ==
 
-    KJabnotify allows programs to use KDE's notification system (aka knotify),
-    even if they're not running on the local host. The communication is done
-    over the network, using the XMPP (Jabber) protocol.
-
+    Tavu allows remote programs to use your local KDE notification system
+    (aka knotify). The network communication between the remote program and
+    knotify is performed using the XMPP (Jabber) protocol.
 
 == How does it work? ==
 
-    - On one side, you have KJabnotify running locally, waiting for incoming
+    - On one side, you have Tavu running locally, waiting for incoming
       messages via Jabber.
-    - On the other side, you have a program that sends messages to KJabnotify,
+    - On the other side, you have a program that sends messages to Tavu,
       for example irssi script 'jabber_hilight_notify.pl'.
 
-    When KJabnotify receives a message, it triggers a KDE notification. A KDE
+    When Tavu receives a message, it triggers a KDE notification. A KDE
     notification has 3 main characteristics:
      1. the application that triggers it,
      2. the name of the event,
@@ -30,3 +29,6 @@
     body, and the name of the application may be the resource. Alternatively,
     the name of the application may be the name associated to its JID in the
     roster.
+
+    Please refer to the project page for more information:
+    http://da.weeno.net/code/tavu/

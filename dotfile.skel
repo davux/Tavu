@@ -5,4 +5,4 @@
 ;password = secret
 
 ;; You can add other settings. See the system-wide configuration file
-;; (usually /etc/kde3/kjabnotifyrc) for the other possible options.
+;; (usually /etc/kde3/tavurc) for the other possible options.

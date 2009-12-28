@@ -11,18 +11,12 @@ from string import Template
 
 def notify(text, appName, summary):
     "Trigger a notification with the given text."
-    # We convert from unicode to isolatin9 instead of the system
-    # encoding to workaround a bug in PyDCOP (see
-    # http://bugs.kde.org/show_bug.cgi?id=105084), unless there's no
-    # corresponding iso-8859-15 chararacter.
-    try: text = text.encode('iso-8859-15')
-    except UnicodeEncodeError:
-        try: text = text.encode(encoding)
-        except: text = '[<b>Error:</b> Unable to decode text]'
-    try: appName = appName.encode('iso-8859-15')
+    try: text = text.encode(encoding)
+    except: text = '[<b>Error:</b> Unable to decode text]'
+    try: appName = appName.encode(encoding)
     except UnicodeEncodeError: appName = app.identifier
-    try: summary = summary.encode('iso-8859-15')
-    except UnicodeEncodeError: summary = '' #XXX: Better fallback name?
+    try: summary = summary.encode(encoding)
+    except UnicodeEncodeError: summary = '' #XXX: Better fallback summary?
     try:
 	session_bus = dbus.SessionBus()
 	obj = session_bus.get_object('org.freedesktop.Notifications', '/org/freedesktop/Notifications')

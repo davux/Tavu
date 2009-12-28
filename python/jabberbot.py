@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 # vi: sts=4 et sw=4
 
+import app
 from common import problem, debug
 from conf import config
 from ConfigParser import NoOptionError, NoSectionError
 import notifications
+from pyxmpp.all import JID
 from pyxmpp.jabber.client import JabberClient
 
 class JabberBot(JabberClient):
@@ -15,7 +17,7 @@ class JabberBot(JabberClient):
 
     def __init__(self, jid, password):
         if not jid.resource:
-            jid=JID(jid.node, jid.domain, appName)
+            jid = JID(jid.node, jid.domain, app.name)
         JabberClient.__init__(self, jid, password)
         self.disco_info.add_feature("jabber:iq:version")
 
@@ -26,14 +28,16 @@ class JabberBot(JabberClient):
         That is the best place to setup various handlers for the stream.
         Do not forget about calling the session_started() method of the base
         class!"""
+        self.request_roster()
         JabberClient.session_started(self)
-        self.stream.set_message_handler("normal", self.message)
 
     # Offline messages are retrieved before the roster is. Since our handling
     # of incoming messages needs the roster, we request it ASAP.
     def authorized(self):
-        self.request_roster()
         JabberClient.authorized(self)
+
+    def roster_updated(self):
+        self.stream.set_message_handler("normal", self.message)
 
     def get_version(self,iq):
         """Handler for jabber:iq:version queries.
@@ -43,8 +47,8 @@ class JabberBot(JabberClient):
         used very carefully!"""
         iq=iq.make_result_response()
         q=iq.new_query("jabber:iq:version")
-        q.newTextChild(q.ns(),"name", appDescription)
-        q.newTextChild(q.ns(),"version", appVersion)
+        q.newTextChild(q.ns(),"name", app.description)
+        q.newTextChild(q.ns(),"version", app.version)
         self.stream.send(iq)
         return True
 
@@ -78,7 +82,8 @@ class JabberBot(JabberClient):
         try:
             crit = config.get(section, 'accept')
         except (NoOptionError, NoSectionError):
-            crit = 'self'
+            crit = 'roster+self'
+        debug("Critere: %s" % crit, 8);
         if crit == 'all':
             return True
         if crit == 'none':

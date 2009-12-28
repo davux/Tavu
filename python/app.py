@@ -2,7 +2,7 @@
 
 name = 'KJabNotify'
 identifier = 'kjabnotify'
-version = '0.1'
+version = '0.2'
 description = 'External notification listener for KDE'
 
 max_verbosity = 0

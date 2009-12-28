@@ -20,15 +20,19 @@ dest_mod_d    = $(PREFIX)/usr/share/tavu/python
 
 all:
 
-install:
-	$(INSTALL_DIR) $(dest_binary_d) $(dest_conf_d)  $(dest_doc_d)    \
-	               $(dest_share_d) $(dest_mod_d)
+install: prog-install doc-install
+
+prog-install:
+	$(INSTALL_DIR) $(dest_binary_d) $(dest_conf_d) $(dest_share_d) $(dest_mod_d)
 	$(INSTALL_PROGRAM) $(binary_f) 	$(dest_binary_d)
 	$(INSTALL_DATA) $(conf_f)	$(dest_conf_d)
-	$(INSTALL_DATA) doc/*		$(dest_doc_d)
 	$(INSTALL_DATA) $(share_f)	$(dest_share_d)
 	$(INSTALL_DATA) python/*.py	$(dest_mod_d)
 	$(COMPILE_DATA) $(dest_mod_d)/*.py
+
+doc-install:
+	$(INSTALL_DIR) $(dest_doc_d)
+	$(INSTALL_DATA) doc/*		$(dest_doc_d)
 
 uninstall:
 	- $(UNINSTALL_PROGRAM) $(dest_binary_d)/$(binary_f)

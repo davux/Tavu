@@ -1,4 +1,4 @@
-PREFIX = /
+DESTDIR = /
 INSTALL = install
 INSTALL_PROGRAM = $(INSTALL) -m 755
 INSTALL_DATA = $(INSTALL) -m 644
@@ -12,11 +12,11 @@ binary_f = tavu-listen
 conf_f   = tavurc
 share_f  = dotfile.skel
 
-dest_binary_d = $(PREFIX)/usr/bin
-dest_conf_d   = $(PREFIX)/etc
-dest_doc_d    = $(PREFIX)/usr/share/doc/tavu
-dest_share_d  = $(PREFIX)/usr/share/tavu
-dest_mod_d    = $(PREFIX)/usr/share/tavu/python
+dest_binary_d = $(DESTDIR)/usr/bin
+dest_conf_d   = $(DESTDIR)/etc
+dest_doc_d    = $(DESTDIR)/usr/share/doc/tavu
+dest_share_d  = $(DESTDIR)/usr/share/tavu
+dest_mod_d    = $(DESTDIR)/usr/share/tavu/python
 
 all:
 

@@ -6,7 +6,7 @@ INSTALL_DIR = $(INSTALL) -d
 UNINSTALL_PROGRAM = rm
 UNINSTALL_DATA = rm
 UNINSTALL_DIR = rmdir -p --ignore-fail-on-non-empty
-COMPILE_DATA = py_compilefiles
+COMPILE_DATA = pycompile
 
 binary_f = tavu-listen
 conf_f   = tavurc

@@ -36,7 +36,7 @@ class JabberBot(JabberClient):
     def authorized(self):
         JabberClient.authorized(self)
 
-    def roster_updated(self):
+    def roster_updated(self, item=None):
         self.stream.set_message_handler("normal", self.message)
 
     def get_version(self,iq):

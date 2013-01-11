@@ -21,7 +21,7 @@ def notify(text, appName, summary):
 	session_bus = dbus.SessionBus()
 	obj = session_bus.get_object('org.freedesktop.Notifications', '/org/freedesktop/Notifications')
 	interface = dbus.Interface(obj, 'org.freedesktop.Notifications')
-	interface.Notify(appName, 0, '', summary, text, [], {}, 16000)
+	interface.Notify(appName, 0, '', summary, text, [], {}, -1)
     except:
         problem('Could not trigger notification: %s \n' % sys.exc_info()[1])
 

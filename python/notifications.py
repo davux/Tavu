@@ -34,6 +34,8 @@ def message2text(body, fromName, resource, fromAddr, subject):
     """
     if fromName == None:
         fromName = fromAddr
+    if subject == None:
+        subject = ''
     section = 'Event information'
     try: text_format = config.get(section, 'text')
     except: text_format = '$body'
